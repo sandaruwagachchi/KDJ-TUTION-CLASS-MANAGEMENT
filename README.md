@@ -12,3 +12,6 @@ Key Technical Highlights:
 -Development Environment: This project was developed entirely within Antigravity, moving beyond traditional VS Code workflows—a shift that significantly boosted my productivity.
 
 Features: ✅ Real-time Enrollment & Class Explorer ✅ Integrated Payment Tracking ✅ Student Profile & Avatar Management ✅ Secure Role-Based Access Control (RBAC)
+
+Student: https://rainbow-otter-d73c53.netlify.app/
+Admin: https://resonant-marzipan-2315c8.netlify.app/
