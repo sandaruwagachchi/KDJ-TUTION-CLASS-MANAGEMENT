@@ -22,7 +22,7 @@
                   Next Gen Platform
                </div>
                <h1 class="text-weight-bold q-mb-md hero-title fade-in-up delay-100" :class="$q.screen.lt.sm ? 'text-h3' : 'text-h1'">
-                  Transform Your <span class="text-gradient">Institute Management</span>
+                  Start Your <span class="text-gradient">Learning Journey</span>
                </h1>
                <p class="q-mb-xl hero-subtitle text-grey-5 fade-in-up delay-200" :class="$q.screen.lt.sm ? 'text-body1' : 'text-h5'">
                   The ultimate solution for modern education management.
@@ -40,9 +40,9 @@
             <div class="hero-overlay absolute-full"></div>
             <div class="container relative-position q-pa-md z-top text-center">
                <h1 class="text-weight-bold q-mb-md hero-title" :class="$q.screen.lt.sm ? 'text-h3' : 'text-h1'">
-                  <span class="text-gradient">Smart Attendance</span>
+                  Student <span class="text-gradient">Portal</span>
                </h1>
-               <p class="q-mb-xl text-white" :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'">QR Code Integration & SMS Alerts</p>
+               <p class="q-mb-xl text-white" :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'">Manage your classes & payments</p>
                 <q-btn outline color="white" :size="$q.screen.lt.sm ? 'md' : 'lg'" label="Learn More" no-caps class="action-btn" :class="$q.screen.lt.sm ? 'q-px-lg' : 'q-px-xl'" />
             </div>
             <!-- Reusing hero image due to quota, styled differently -->
@@ -168,22 +168,22 @@ const slide = ref('first')
 
 const features = [
   {
-    title: 'Student Management',
+    title: 'Smart Class Explorer',
     description:
-      'Add, edit, and track student profiles with ease. Manage enrollments efficiently.',
+      'Search classes by subject, view detailed descriptions, and enroll instantly.',
     image: featureStudentImg,
   },
   {
-    title: 'Class Scheduling',
+    title: 'Flexible Payments',
     description:
-      'Manage subjects, grades, fees, and detailed class descriptions for your students.',
-    image: featureAttendanceImg,
+      'Pay online securely or choose to pay later. Track your payment history.',
+    image: featurePaymentImg,
   },
   {
-    title: 'Financial Analytics',
+    title: 'My Learning Hub',
     description:
-      'Visualize monthly income, track revenue trends, and monitor pending payments.',
-    image: featurePaymentImg,
+      'Access your enrolled class schedule and manage your personal profile.',
+    image: featureAttendanceImg,
   },
 ]
 </script>

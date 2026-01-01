@@ -1,10 +1,10 @@
 <template>
   <q-item
     clickable
-    :tag="props.isRoute ? 'div' : 'a'"
-    :target="props.isRoute ? undefined : '_blank'"
-    :href="props.isRoute ? undefined : props.link"
-    :to="props.isRoute ? props.link : undefined"
+    :tag="isInternal ? 'div' : 'a'"
+    :target="isInternal ? undefined : '_blank'"
+    :href="isInternal ? undefined : props.link"
+    :to="isInternal ? props.link : undefined"
   >
     <q-item-section v-if="props.icon" avatar>
       <q-icon :name="props.icon" />
@@ -43,5 +43,11 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
+})
+
+import { computed } from 'vue'
+
+const isInternal = computed(() => {
+  return props.isRoute || props.link.startsWith('/')
 })
 </script>

@@ -92,10 +92,15 @@ const handleLogin = async () => {
   })
 
   if (error) {
+    let msg = error.message
+    if (msg.includes('Email not confirmed')) {
+        msg = 'Email confirmation required. Check your inbox or disable "Confirm Email" in Supabase.'
+    }
     $q.notify({
       type: 'negative',
-      message: error.message,
-      position: 'top'
+      message: msg,
+      position: 'top',
+      timeout: 5000 // Verified timeout
     })
   } else {
     $q.notify({

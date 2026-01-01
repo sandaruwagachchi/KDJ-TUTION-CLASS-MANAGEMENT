@@ -5,35 +5,20 @@
       
       <q-card class="auth-card glass-card q-pa-xl relative-position">
         <q-card-section class="text-center">
-            <q-icon name="admin_panel_settings" size="64px" color="white" class="q-mb-md" />
-            <div class="text-h4 text-weight-bold q-mb-xs text-gradient">Administrator Portal</div>
-            <div class="text-grey-5 text-subtitle2">System Registration</div>
+           <div class="text-h4 text-weight-bold q-mb-sm text-gradient">Welcome Back</div>
+           <div class="text-grey-5">Sign in to access your dashboard</div>
         </q-card-section>
 
         <q-card-section>
-          <q-form @submit="handleRegister" class="q-gutter-md">
-             <q-input
-              filled
-              v-model="name"
-              label="Institute Name"
-              dark
-              color="white"
-              class="auth-input"
-              :rules="[val => !!val || 'Name is required']"
-            >
-               <template v-slot:prepend>
-                  <q-icon name="business" color="grey-5" />
-               </template>
-            </q-input>
-
+          <q-form @submit="handleLogin" class="q-gutter-md">
             <q-input
               filled
               v-model="email"
-              label="Email Address"
+              label="Email"
               dark
               color="white"
               class="auth-input"
-               :rules="[val => !!val || 'Email is required', val => /.+@.+\..+/.test(val) || 'Valid email required']"
+              :rules="[val => !!val || 'Email is required', val => /.+@.+\..+/.test(val) || 'Valid email required']"
             >
                <template v-slot:prepend>
                   <q-icon name="email" color="grey-5" />
@@ -48,16 +33,21 @@
               dark
               color="white"
               class="auth-input"
-              :rules="[val => !!val || 'Password is required', val => val.length >= 6 || 'Min 6 characters']"
+              :rules="[val => !!val || 'Password is required']"
             >
                <template v-slot:prepend>
                   <q-icon name="lock" color="grey-5" />
                </template>
             </q-input>
 
+            <div class="row justify-between items-center q-mt-sm">
+               <q-checkbox v-model="rememberMe" label="Remember me" dark color="grey-5" size="sm" dense />
+               <a href="#" class="text-grey-5 text-caption no-decoration hover-underline">Forgot Password?</a>
+            </div>
+
             <div class="q-mt-lg">
               <q-btn
-                label="Register Administrator"
+                label="Sign In"
                 type="submit"
                 color="white"
                 text-color="black"
@@ -70,11 +60,9 @@
         </q-card-section>
 
         <q-card-section class="text-center q-mt-md">
-           <div class="text-grey-6 text-caption">
-              Restricted Area. Authorized Access Only.
-           </div>
-           <div class="q-mt-sm">
-              <router-link to="/login" class="text-grey-4 text-weight-medium no-decoration hover-underline">Back to Login</router-link>
+           <div class="text-grey-5">
+              Don't have an account? 
+              <router-link to="/register" class="text-white text-weight-bold no-decoration hover-underline">Sign Up</router-link>
            </div>
         </q-card-section>
       </q-card>
@@ -90,38 +78,37 @@ import { useQuasar } from 'quasar'
 
 const $q = useQuasar()
 const router = useRouter()
-const name = ref('')
 const email = ref('')
 const password = ref('')
+const rememberMe = ref(false)
 const loading = ref(false)
 
-const handleRegister = async () => {
+const handleLogin = async () => {
   loading.value = true
   
-  const { error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-    options: {
-      data: {
-        institute_name: name.value,
-        role: 'Administrator' // Explicitly setting role on register (optional here but good for clarity)
-      },
-    },
   })
 
   if (error) {
+    let msg = error.message
+    if (msg.includes('Email not confirmed')) {
+        msg = 'Email confirmation required. Check your inbox or disable "Confirm Email" in Supabase.'
+    }
     $q.notify({
       type: 'negative',
-      message: error.message,
-      position: 'top'
+      message: msg,
+      position: 'top',
+      timeout: 5000
     })
   } else {
     $q.notify({
       type: 'positive',
-      message: 'Registration successful! Check your email.',
+      message: 'Welcome back!',
       position: 'top'
     })
-    router.push('/login')
+    router.push('/dashboard')
   }
   
   loading.value = false
@@ -130,9 +117,9 @@ const handleRegister = async () => {
 
 <style scoped>
 .glass-card {
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   width: 100%;
   max-width: 450px;
@@ -147,12 +134,12 @@ const handleRegister = async () => {
 .glow-effect {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(primary, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   filter: blur(80px);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #888888 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -160,8 +147,7 @@ const handleRegister = async () => {
 
 .auth-input :deep(.q-field__control) {
   background: rgba(255, 255, 255, 0.05) !important;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
 }
 
 .auth-input :deep(.q-field__label) {
@@ -176,7 +162,7 @@ const handleRegister = async () => {
     transition: all 0.3s ease;
 }
 .btn-glow:hover {
-    box-shadow: 0 0 15px rgba(25, 118, 210, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     transform: translateY(-1px);
 }
 </style>

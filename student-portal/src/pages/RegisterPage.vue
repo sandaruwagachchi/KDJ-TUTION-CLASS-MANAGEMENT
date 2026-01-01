@@ -5,9 +5,9 @@
       
       <q-card class="auth-card glass-card q-pa-xl relative-position">
         <q-card-section class="text-center">
-            <q-icon name="admin_panel_settings" size="64px" color="white" class="q-mb-md" />
-            <div class="text-h4 text-weight-bold q-mb-xs text-gradient">Administrator Portal</div>
-            <div class="text-grey-5 text-subtitle2">System Registration</div>
+            <q-icon name="school" size="64px" color="white" class="q-mb-md" />
+            <div class="text-h4 text-weight-bold q-mb-xs text-gradient">Student Portal</div>
+            <div class="text-grey-5 text-subtitle2">Create your account</div>
         </q-card-section>
 
         <q-card-section>
@@ -15,14 +15,14 @@
              <q-input
               filled
               v-model="name"
-              label="Institute Name"
+              label="Full Name"
               dark
               color="white"
               class="auth-input"
               :rules="[val => !!val || 'Name is required']"
             >
                <template v-slot:prepend>
-                  <q-icon name="business" color="grey-5" />
+                  <q-icon name="person" color="grey-5" />
                </template>
             </q-input>
 
@@ -57,7 +57,7 @@
 
             <div class="q-mt-lg">
               <q-btn
-                label="Register Administrator"
+                label="Create Account"
                 type="submit"
                 color="white"
                 text-color="black"
@@ -71,10 +71,10 @@
 
         <q-card-section class="text-center q-mt-md">
            <div class="text-grey-6 text-caption">
-              Restricted Area. Authorized Access Only.
+              Start your learning journey today.
            </div>
            <div class="q-mt-sm">
-              <router-link to="/login" class="text-grey-4 text-weight-medium no-decoration hover-underline">Back to Login</router-link>
+              <router-link to="/login" class="text-grey-4 text-weight-medium no-decoration hover-underline">Already have an account? Sign In</router-link>
            </div>
         </q-card-section>
       </q-card>
@@ -103,8 +103,8 @@ const handleRegister = async () => {
     password: password.value,
     options: {
       data: {
-        institute_name: name.value,
-        role: 'Administrator' // Explicitly setting role on register (optional here but good for clarity)
+        full_name: name.value, // Changed from institute_name to full_name for students
+        role: 'Student'
       },
     },
   })
@@ -147,7 +147,7 @@ const handleRegister = async () => {
 .glow-effect {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(primary, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   filter: blur(80px);
 }
 
@@ -176,7 +176,7 @@ const handleRegister = async () => {
     transition: all 0.3s ease;
 }
 .btn-glow:hover {
-    box-shadow: 0 0 15px rgba(25, 118, 210, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     transform: translateY(-1px);
 }
 </style>

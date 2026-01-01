@@ -119,36 +119,31 @@ const linksList = [
     title: 'Dashboard',
     caption: 'Overview',
     icon: 'dashboard',
-    link: '/dashboard',
-    isRoute: true
+    link: '/dashboard'
   },
   {
-    title: 'Students',
-    caption: 'Manage Students',
-    icon: 'people',
-    link: '/students',
-    isRoute: true
-  },
-  {
-    title: 'Classes',
-    caption: 'Manage Classes',
+    title: 'My Classes',
+    caption: 'Enrolled Subjects',
     icon: 'school',
-    link: '/classes',
-    isRoute: true
+    link: '/my-classes'
   },
   {
-    title: 'Payments',
-    caption: 'Fee Management',
+    title: 'Class Explorer',
+    caption: 'Join New Classes',
+    icon: 'search',
+    link: '/classes'
+  },
+  {
+    title: 'My Payments',
+    caption: 'Payment History',
     icon: 'payments',
-    link: '/payments',
-    isRoute: true
+    link: '/payments'
   },
   {
-    title: 'Reports',
-    caption: 'View Analytics',
-    icon: 'analytics',
-    link: '/reports',
-    isRoute: true
+    title: 'Profile',
+    caption: 'My Account',
+    icon: 'person',
+    link: '/profile'
   }
 ]
 
